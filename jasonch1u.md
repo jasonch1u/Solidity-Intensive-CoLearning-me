@@ -769,25 +769,15 @@ cast wallet vanity --starts-with 1234
 #### 13_Inheritance
 
 #### 14_Interface
-
-接口（Interface）定義：
-接口是一種特殊的合約類型，只定義函數簽名，不包含實現。
+接口（Interface）定義：接口是一種特殊的合約類型，只定義函數簽名，不包含實現。
 
 目的：
-定義標準（如 ERC20、ERC721）
-實現合約間的安全交互
-提供類型檢查和編譯時錯誤捕捉
-
-
-基本語法：
-```solidity
-interface IExample {
-    function someFunction(uint256 arg) external returns (bool);
-    function anotherFunction() external view returns (uint256);
-}
-```
+   * 定義標準（如 ERC20、ERC721）
+   * 實現合約間的安全交互
+   * 提供類型檢查和編譯時錯誤捕捉
 
 使用方法：
+
 a. 定義接口：
 ```solidity
 
@@ -816,7 +806,10 @@ contract MyContract {
 
 a. 直接調用：
 ```solidity
-IERC20(tokenAddress).transfer(to, amount);
+IERC20(tokenAddress).transfer(to, amount); //一步寫法直接調用
+
+IERC20 token = IERC20(tokenAddress); //兩步寫法
+token.transfer(to, amount);
 ```
 b. 多重接口：
 ```solidity
@@ -825,30 +818,20 @@ interface ICompound is IERC20 {
 }
 ```
 接口的產生：
-
-由合約開發者或標準制定者創建、
-可以從現有合約中提取、
-可以根據需要自行定義
+* 由合約開發者或標準制定者創建、
+* 可以從現有合約中提取、
+* 可以根據需要自行定義
 
 如何產生接口：
-a. 從現有合約提取：
+a. 從現有合約提取：識別所有 public 和 external 函數，創建只包含這些函數簽名的接口
 
-識別所有 public 和 external 函數、
-創建只包含這些函數簽名的接口
-
-b. 根據需求自定義：
-
-定義您需要與之交互的函數、
-確保函數簽名正確匹配目標合約
-
+b. 根據需求自定義：定義您需要與之交互的函數，確保函數簽名正確匹配目標合約
 
 接口的特點：
-
-不能包含狀態變量、
-不能包含構造函數、
-所有函數必須是 external、
-不能繼承其他合約（但可以繼承其他接口）
-
+* 不能包含狀態變量
+* 不能包含構造函數
+* 所有函數必須是 external
+* 不能繼承其他合約（但可以繼承其他接口）
 
 實際應用示例：
 ```solidity
@@ -885,10 +868,9 @@ contract MyDeFiProject {
 }
 ```
 注意事項：
-
-確保接口與實際合約函數完全匹配、
-接口可以提高代碼的模塊化和可維護性、
-使用接口可以與未知實現的合約安全交互、
+* 確保接口與實際合約函數完全匹配
+* 接口可以提高代碼的模塊化和可維護性
+* 使用接口可以與未知實現的合約安全交互
 
 接口是智能合約開發中非常重要的工具，它允許不同合約之間進行標準化和類型安全的交互。通過接口，您可以與各種遵循特定標準的合約進行交互，而不需要了解這些合約的具體實現細節。
 
