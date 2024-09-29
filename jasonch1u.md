@@ -811,7 +811,7 @@ IERC20(tokenAddress).transfer(to, amount); //一步寫法直接調用
 IERC20 token = IERC20(tokenAddress); //兩步寫法
 token.transfer(to, amount);
 ```
-b. 多重接口：
+b. 接口繼承：(看起來很複雜，建議另外找說明)
 ```solidity
 interface ICompound is IERC20 {
     function mint(uint256 amount) external returns (uint256);
@@ -824,7 +824,6 @@ interface ICompound is IERC20 {
 
 如何產生接口：
 a. 從現有合約提取：識別所有 public 和 external 函數，創建只包含這些函數簽名的接口
-
 b. 根據需求自定義：定義您需要與之交互的函數，確保函數簽名正確匹配目標合約
 
 接口的特點：
